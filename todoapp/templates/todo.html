@@ -1,0 +1,241 @@
+{% load static%}
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhai+2:wght@800&family=Righteous&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta charset="UTF-8">
+    <title>Todo List</title>
+    <style>
+    body{
+  margin:0%;
+  padding:0%;
+  box-sizing:border-box;
+
+  }
+        header{
+
+
+ background: url("/static/images/back.jpg") no-repeat center center fixed;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+
+
+
+
+
+        }
+    </style>
+</head>
+<body>
+<header>
+<nav class="navbar navbar-expand-lg fixed-top shadow-lg navbar-light bg-light" style="opacity:0.9;">
+  <a class="navbar-brand text-info" href="#" style="font-family: 'Baloo Bhai 2', cursive;"><img src="{% static 'images/logo.jpg'%}" width="50px;"> Django TODO Shopping List Web Application</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#" style="font-family: 'Baloo Bhai 2', cursive;">Home <span class="sr-only">(current)</span></a>
+      </li>
+     <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" style="font-family: 'Baloo Bhai 2', cursive;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Total Expands
+        </a>
+        <div class="dropdown-menu shadow-lg" style="width:200px;" aria-labelledby="navbarDropdown">
+          <div class="shadow-sm text-center border-left border-bottom" style="border-radius:10px;">
+            <img src="{%static 'images/logo.jpg'%}" width="30px;">
+            <h6 class="text-center px-1 py-3" style="font-family: 'Baloo Bhai 2', cursive;">Total Expands <br><br><span class="badge badge-danger" style="font-size:15px;">
+                {% for expands in expand %}
+                {{expands}}<br><br>
+                {% endfor %}
+            </span></h6>
+          <span class="text-center"></span>
+          </div>
+      </li>
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" style="font-family: 'Baloo Bhai 2', cursive;" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Items
+        </a>
+        <div class="dropdown-menu shadow-lg" style="width:200px;" aria-labelledby="navbarDropdown">
+          <div class="shadow-sm text-center border-left border-bottom" style="border-radius:10px;">
+            <img src="{%static 'images/logo.jpg'%}" width="30px;">
+            <h6 class="text-center px-1 py-3" style="font-family: 'Baloo Bhai 2', cursive;">Total Items Added to List <br><br><span class="badge badge-danger" style="font-size:20px;">{{count}}</span></h6>
+          <span class="text-center"></span>
+          </div>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" style="font-family: 'Baloo Bhai 2', cursive;" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+      </li>
+    </ul>
+
+   <button type="button" style="font-family: 'Baloo Bhai 2', cursive;" class="btn btn-info btn-sm" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap"><i class="fa fa-plus"></i> Add List</button>
+
+
+  </div>
+</nav>
+
+ {% if all_items %}
+      {% else %}
+      <div class="container-fluid" style="padding-top:100px;">
+      <h5 class="text-center alert alert-danger" style="font-family: 'Baloo Bhai 2', cursive;"> Sorry !! We don't Found any Items | Add Items on your List ....</h5>
+      </div>
+      {% endif %}
+
+  <div  style="width:950px;padding-top:150px;padding-left:400px;">
+
+
+<h3 class="border px-5 py-3 text-danger text-center shadow-sm bg-white"  style="font-family: 'Baloo Bhai 2', cursive;border-radius:10px;">To-Do Shopping List Items  {%if count%} | {{count}} Items {%endif%}</h3>
+
+
+  </div>
+  {% if messages %}
+{% for message in messages %}
+  <h5 class="text-center alert alert-success" style="font-family: 'Baloo Bhai 2', cursive;">{{message}}</h5>
+
+  {% endfor %}
+  {% endif %}
+  <div class="" style="width:950px;padding-left:400px;">
+    <div class="row">
+        {% if all_items %}
+      {% for items in all_items %}
+   <div class="col-sm-6 my-5 border bg-white px-5 py-3 shadow-sm" style="border-radius:10px;width:950px;">
+     <img src="{%static 'images/logo.jpg'%}" style="margin-left:75px;" width="40px;"><br>
+     <span class="badge badge-success ml-4" style="font-size:10px;font-family:verdana,sans-serif;">{{items.date}} | {{items.date|naturalday}}</span>
+
+     <div class="shadow-sm border-left border-bottom" style="border-radius:10px;">
+     <h6 class="text-center mt-4" style="font-family: 'Baloo Bhai 2', cursive;">Item-Title</h6>
+     <p style="font-family:verdana,sans-serif;font-size:13px;" class="text-center">{{items.item_title}}</p>
+     </div>
+     <div class="shadow-sm mt-3 border-left border-bottom" style="border-radius:10px;">
+     <h6 class="text-center" style="font-family: 'Baloo Bhai 2', cursive;">Item Description</h6>
+     <p style="font-family:verdana,sans-serif;font-size:13px;width:100%;" class="text-center">{{items.description}}</p>
+     </div>
+    <div class="shadow-sm mt-3 border-left border-bottom" style="border-radius:10px;">
+     <h6 class="text-center" style="font-family: 'Baloo Bhai 2', cursive;">Item-price</h6>
+     <p style="font-family:verdana,sans-serif;font-size:13px;" class="text-center">{{items.item_price}}&#36;</p>
+    </div>
+      <div class="ml-5 mt-3 d-flex">
+     <button style="font-family:'Baloo Bhai 2', cursive;font-size:13px;" class="btn btn-success ml-2 btn-sm" data-toggle="modal" data-target="#example{{items.id}}" data-whatever="@getbootstrap"><i class="fa fa-edit"></i> Edit</button>
+
+        <form method="post" action="/">{% csrf_token %}
+
+          <input type="hidden" name="id" value="{{items.id}}">
+          <button name="delete" style="font-family:'Baloo Bhai 2', cursive;font-size:13px;" class="btn btn-danger ml-2 btn-sm"><i class="fa fa-trash"></i> Delete</button>
+
+        </form>
+
+
+
+     </div>
+   </div>
+
+<div class="modal fade shadow-lg" id="example{{items.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-info" id="exampleModalLabel" style="font-family: 'Baloo Bhai 2', cursive;">Edit List Items</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="/">{% csrf_token %}
+
+          <input type="hidden" name="id" value="{{items.id}}">
+          <div class="form-group">
+            <label for="recipient-name" style="font-family: 'Baloo Bhai 2', cursive;" class="col-form-label">Item Title</label>
+            <input required style="font-family:verdana,sans-serif;font-size:13px;"  type="text" name="title" value="{{items.item_title}}" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label" style="font-family: 'Baloo Bhai 2', cursive;">Description ( Optional )</label>
+            <textarea name="desc" style="font-family:verdana,sans-serif;font-size:13px;"  class="form-control" id="message-text">
+
+              {{items.description}}
+
+            </textarea>
+          </div>
+           <div class="form-group">
+            <label for="recipient-name" style="font-family: 'Baloo Bhai 2', cursive;" class="col-form-label">Item Price</label>
+            <input required style="font-family:verdana,sans-serif;font-size:13px;"  name="price" value="{{items.item_price}}"  type="text" class="form-control" id="recipient-name">
+          </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" style="font-family: 'Baloo Bhai 2', cursive;" data-dismiss="modal">Close</button>
+        <button class="btn btn-danger btn-sm" name="edit" style="font-family: 'Baloo Bhai 2', cursive;"><i class="fa fa-plus"></i> Update</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+{% endfor %}
+
+        {% else %}
+
+        <div class="mt-5" style="margin-left:170px;padding-bottom:400px;">
+            <button class="btn btn-info btn-lg" data-toggle="modal" data-target="#exampleModal" data-whatever="@getbootstrap" style="font-family: 'Baloo Bhai 2', cursive;"> <i class="fa fa-plus"></i> Add Items to your List</button>
+
+
+        </div>
+
+{% endif %}
+
+ </div>
+ </div>
+
+
+
+</header>
+
+<div class="modal fade shadow-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-info" id="exampleModalLabel" style="font-family: 'Baloo Bhai 2', cursive;">Add List Items</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form method="post" action="/">{% csrf_token %}
+          <div class="form-group">
+            <label for="recipient-name" style="font-family: 'Baloo Bhai 2', cursive;" class="col-form-label">Item Title</label>
+            <input type="text" required name="title" class="form-control" id="recipient-name">
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label" style="font-family: 'Baloo Bhai 2', cursive;">Description ( Optional )</label>
+            <textarea name="desc" class="form-control" id="message-text"></textarea>
+          </div>
+           <div class="form-group">
+            <label for="recipient-name" style="font-family: 'Baloo Bhai 2', cursive;" class="col-form-label">Item Price</label>
+            <input name="price" required type="text" class="form-control" id="recipient-name">
+          </div>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary btn-sm" style="font-family: 'Baloo Bhai 2', cursive;" data-dismiss="modal">Close</button>
+        <button class="btn btn-danger btn-sm" name="add" style="font-family: 'Baloo Bhai 2', cursive;"><i class="fa fa-plus"></i> ADD</button>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+</body>
+</html>
