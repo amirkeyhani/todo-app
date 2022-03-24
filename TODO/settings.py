@@ -33,6 +33,7 @@ ALLOWED_HOSTS = []
 INSTALLED_APPS = [
     'todoapp.apps.TodoappConfig',
     'django.contrib.humanize',
+    'account.apps.AccountConfig',
     
     'django.contrib.admin',
     'django.contrib.auth',

@@ -1,0 +1,11 @@
+from dataclasses import fields
+from statistics import mode
+from tkinter.tix import Form
+from django import forms
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
+
+class UserRegistrationForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username']
