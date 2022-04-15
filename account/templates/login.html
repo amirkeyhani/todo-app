@@ -1,0 +1,27 @@
+<html>
+<body>
+    <div class="text-center mt-5">
+        <h3 class="text-info font"><h>Login</b></h3> <br>
+        <p>{% if form.non_field_errors %}
+            {% for error in form.non_field_errors %}
+                <small class="text-danger font"> <b>{{ error }}</b></small>
+            {% endfor %}
+            </ul>
+            {% endif %}</p>
+    <form method="post" novalidate>
+        {% csrf_token %}
+        <span class="text-danger font">
+            <b>{{form.username.errors}}</b></span>
+        <span class="font">
+            <b>{{form.username.label}}</b></span> {{form.username}}
+        <br> <br>
+        <span class="text-danger font"><b>
+            {{form.password.errors}}</b></span>
+        <span class="font"><b>{{form.password.label}} </b>
+        </span>{{form.password}}<br> <br>
+        <button class="font btn btn-info"><b>Login</b></button>&nbsp;
+        <p><a href="/change-password/">Reset password</a></p>
+    </form>
+    <p>Haven't any account? <a href="/signup/">Signup here</a></p>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<html>
+<body>
+    <div closs="text-center mb-5">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-info font" style="width:300px; margin-left:530px;"><b>
+                    {{message}} </b></div>
+            {% endfor %}
+        {% endif %}
+        <form method="post" novalidate>
+            {% csrf_token %}
+            <h3 classs="text-info font"><b>Update Form</b></h3> <br>
+            <span class="text-danger font"><b>{{u_fm.username.errors}}</b></span>
+            <span class="text-danger font">{{u_fm.username.first_name}}</span>
+            <span><b>{{u_fm.username.label}}</b></span> {{u_fm.username}} <br> <br>
+            <span class="text-danger font"><b>{{u_fm.email.errors}}</b></span>
+            <span><b>{{u_fm.email.label}}</b></span> {{u_fm.email}} <br> <br>
+            <span class="text-danger font"><b>{{u_fm.first_name.errors}}</b></span>
+            <span><b>{{u_fm.first_name.label}}</b></span> {{u_fm.first_name}} <br> <br>
+            <span class="text-danger font"><b>{{u_fm.last_name.errors}}</b></span>
+            <span><b>{{u_fm.last_name.label}}</b></span> {{u_fm.last_name}} <br> <br>
+            <button class="btn btn-info font"><b>Update</b></button>
+        </form>
+    </div>
+</body>
+</html>

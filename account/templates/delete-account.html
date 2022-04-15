@@ -1,0 +1,17 @@
+<html>
+<body>
+    <div class='mt-5 text-center'>
+        <div class='mt-5 text-center'>
+            <h3 class='font'>
+                <b>Do you want to delete your account?</b></h3> <br>
+            <form action='' method='POST'>
+                {% csrf_token %}
+                <button class='btn btn-info font px-3'>
+                    <b>Yes</b></button>
+                <a href='/' class='btn btn-warning font px-3'>
+                    <b>No</b></a>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

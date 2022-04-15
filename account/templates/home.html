@@ -1,0 +1,38 @@
+{% comment %} <!DOCTYPE html>
+<html lang='en'>
+<head>
+    <meta charset='UTF_8'>
+    <meta name='viewport', content='width=device-width', initial-scale=1.0>
+    <title>home form</title>
+</head>
+<body>
+    <form novalidate>
+        {% csrf_token %}
+        {{ fm.uname.label }} {{ fm.uname }} <br><br>
+        {{ fm.email.label }} {{ fm.email }} <br><br>
+        {{ fm.password.label }} {{ fm.password }} <br><br>
+        <button>submit</button>
+    </form>
+</body>
+</html> {% endcomment %}
+<html>
+<head>
+    <meta charset='UTF_8'>
+    <meta name='viewport', content='width=device-width', initial-scale=1.0>
+    <title>Home</title>
+</head>
+<body>
+    <div class="text-center mt-5">
+        {% if user.is_authenticated %}
+            <h1 class="text-success font">
+                <b>You are successfully Logged in</b></h1>
+            <a class="btn btn-danger font" href="/logout/">
+            <b>Logout</b></a>
+        {% else %}
+            <h1 class="text-success font">
+                <b>You are an Unauthorized User</b></h1>
+            <a class="btn btn-danger font" href="/login/"><b>Login</b></a>
+        {% endif %}
+    </div>
+</body>
+</html>
